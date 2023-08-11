@@ -1,0 +1,42 @@
+<.header>
+  Listing Coaches
+  <:actions>
+    <.link patch={~p"/coaches/new"}>
+      <.button>New Coach</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="coaches"
+  rows={@streams.coaches}
+  row_click={fn {_id, coach} -> JS.navigate(~p"/coaches/#{coach}") end}
+>
+  <:col :let={{_id, coach}} label="Role"><%= coach.role %></:col>
+  <:col :let={{_id, coach}} label="Tactical"><%= coach.tactical %></:col>
+  <:action :let={{_id, coach}}>
+    <div class="sr-only">
+      <.link navigate={~p"/coaches/#{coach}"}>Show</.link>
+    </div>
+    <.link patch={~p"/coaches/#{coach}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, coach}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: coach.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="coach-modal" show on_cancel={JS.patch(~p"/coaches")}>
+  <.live_component
+    module={PhxballWeb.CoachLive.FormComponent}
+    id={@coach.id || :new}
+    title={@page_title}
+    action={@live_action}
+    coach={@coach}
+    patch={~p"/coaches"}
+  />
+</.modal>

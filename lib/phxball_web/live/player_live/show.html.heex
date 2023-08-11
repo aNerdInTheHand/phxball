@@ -1,0 +1,49 @@
+<.header>
+  Player <%= @player.id %>
+  <:subtitle>This is a player record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/players/#{@player}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit player</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Position"><%= @player.position %></:item>
+  <:item title="Men aggression"><%= @player.men_aggression %></:item>
+  <:item title="Men composure"><%= @player.men_composure %></:item>
+  <:item title="Men fortitude"><%= @player.men_fortitude %></:item>
+  <:item title="Phys cardio"><%= @player.phys_cardio %></:item>
+  <:item title="Phys speed"><%= @player.phys_speed %></:item>
+  <:item title="Phys recovery"><%= @player.phys_recovery %></:item>
+  <:item title="Phys resilience"><%= @player.phys_resilience %></:item>
+  <:item title="Gk shotstopping"><%= @player.gk_shotstopping %></:item>
+  <:item title="Gk crosses"><%= @player.gk_crosses %></:item>
+  <:item title="Gk distribution"><%= @player.gk_distribution %></:item>
+  <:item title="Def marking"><%= @player.def_marking %></:item>
+  <:item title="Def positioning"><%= @player.def_positioning %></:item>
+  <:item title="Def heading"><%= @player.def_heading %></:item>
+  <:item title="Def tackling"><%= @player.def_tackling %></:item>
+  <:item title="Def attacking"><%= @player.def_attacking %></:item>
+  <:item title="Mid positioning"><%= @player.mid_positioning %></:item>
+  <:item title="Mid passing"><%= @player.mid_passing %></:item>
+  <:item title="Mid shooting"><%= @player.mid_shooting %></:item>
+  <:item title="Mid dribbling"><%= @player.mid_dribbling %></:item>
+  <:item title="Mid flair"><%= @player.mid_flair %></:item>
+  <:item title="Att shooting"><%= @player.att_shooting %></:item>
+  <:item title="Att heading"><%= @player.att_heading %></:item>
+  <:item title="Att link up"><%= @player.att_link_up %></:item>
+</.list>
+
+<.back navigate={~p"/players"}>Back to players</.back>
+
+<.modal :if={@live_action == :edit} id="player-modal" show on_cancel={JS.patch(~p"/players/#{@player}")}>
+  <.live_component
+    module={PhxballWeb.PlayerLive.FormComponent}
+    id={@player.id}
+    title={@page_title}
+    action={@live_action}
+    player={@player}
+    patch={~p"/players/#{@player}"}
+  />
+</.modal>

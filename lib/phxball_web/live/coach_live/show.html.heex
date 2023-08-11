@@ -1,0 +1,27 @@
+<.header>
+  Coach <%= @coach.id %>
+  <:subtitle>This is a coach record from your database.</:subtitle>
+  <:actions>
+    <.link patch={~p"/coaches/#{@coach}/show/edit"} phx-click={JS.push_focus()}>
+      <.button>Edit coach</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.list>
+  <:item title="Role"><%= @coach.role %></:item>
+  <:item title="Tactical"><%= @coach.tactical %></:item>
+</.list>
+
+<.back navigate={~p"/coaches"}>Back to coaches</.back>
+
+<.modal :if={@live_action == :edit} id="coach-modal" show on_cancel={JS.patch(~p"/coaches/#{@coach}")}>
+  <.live_component
+    module={PhxballWeb.CoachLive.FormComponent}
+    id={@coach.id}
+    title={@page_title}
+    action={@live_action}
+    coach={@coach}
+    patch={~p"/coaches/#{@coach}"}
+  />
+</.modal>

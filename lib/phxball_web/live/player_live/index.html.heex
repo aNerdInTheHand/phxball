@@ -1,0 +1,64 @@
+<.header>
+  Listing Players
+  <:actions>
+    <.link patch={~p"/players/new"}>
+      <.button>New Player</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="players"
+  rows={@streams.players}
+  row_click={fn {_id, player} -> JS.navigate(~p"/players/#{player}") end}
+>
+  <:col :let={{_id, player}} label="Position"><%= player.position %></:col>
+  <:col :let={{_id, player}} label="Men aggression"><%= player.men_aggression %></:col>
+  <:col :let={{_id, player}} label="Men composure"><%= player.men_composure %></:col>
+  <:col :let={{_id, player}} label="Men fortitude"><%= player.men_fortitude %></:col>
+  <:col :let={{_id, player}} label="Phys cardio"><%= player.phys_cardio %></:col>
+  <:col :let={{_id, player}} label="Phys speed"><%= player.phys_speed %></:col>
+  <:col :let={{_id, player}} label="Phys recovery"><%= player.phys_recovery %></:col>
+  <:col :let={{_id, player}} label="Phys resilience"><%= player.phys_resilience %></:col>
+  <:col :let={{_id, player}} label="Gk shotstopping"><%= player.gk_shotstopping %></:col>
+  <:col :let={{_id, player}} label="Gk crosses"><%= player.gk_crosses %></:col>
+  <:col :let={{_id, player}} label="Gk distribution"><%= player.gk_distribution %></:col>
+  <:col :let={{_id, player}} label="Def marking"><%= player.def_marking %></:col>
+  <:col :let={{_id, player}} label="Def positioning"><%= player.def_positioning %></:col>
+  <:col :let={{_id, player}} label="Def heading"><%= player.def_heading %></:col>
+  <:col :let={{_id, player}} label="Def tackling"><%= player.def_tackling %></:col>
+  <:col :let={{_id, player}} label="Def attacking"><%= player.def_attacking %></:col>
+  <:col :let={{_id, player}} label="Mid positioning"><%= player.mid_positioning %></:col>
+  <:col :let={{_id, player}} label="Mid passing"><%= player.mid_passing %></:col>
+  <:col :let={{_id, player}} label="Mid shooting"><%= player.mid_shooting %></:col>
+  <:col :let={{_id, player}} label="Mid dribbling"><%= player.mid_dribbling %></:col>
+  <:col :let={{_id, player}} label="Mid flair"><%= player.mid_flair %></:col>
+  <:col :let={{_id, player}} label="Att shooting"><%= player.att_shooting %></:col>
+  <:col :let={{_id, player}} label="Att heading"><%= player.att_heading %></:col>
+  <:col :let={{_id, player}} label="Att link up"><%= player.att_link_up %></:col>
+  <:action :let={{_id, player}}>
+    <div class="sr-only">
+      <.link navigate={~p"/players/#{player}"}>Show</.link>
+    </div>
+    <.link patch={~p"/players/#{player}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, player}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: player.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="player-modal" show on_cancel={JS.patch(~p"/players")}>
+  <.live_component
+    module={PhxballWeb.PlayerLive.FormComponent}
+    id={@player.id || :new}
+    title={@page_title}
+    action={@live_action}
+    player={@player}
+    patch={~p"/players"}
+  />
+</.modal>

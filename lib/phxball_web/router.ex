@@ -18,6 +18,20 @@ defmodule PhxballWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :home
+
+    live "/players", PlayerLive.Index, :index
+    live "/players/new", PlayerLive.Index, :new
+    live "/players/:id/edit", PlayerLive.Index, :edit
+
+    live "/players/:id", PlayerLive.Show, :show
+    live "/players/:id/show/edit", PlayerLive.Show, :edit
+
+    live "/coaches", CoachLive.Index, :index
+    live "/coaches/new", CoachLive.Index, :new
+    live "/coaches/:id/edit", CoachLive.Index, :edit
+
+    live "/coaches/:id", CoachLive.Show, :show
+    live "/coaches/:id/show/edit", CoachLive.Show, :edit
   end
 
   # Other scopes may use custom stacks.
