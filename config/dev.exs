@@ -2,8 +2,8 @@ import Config
 
 # Configure your database
 config :phxball, Phxball.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "nick",
+  password: "",
   hostname: "localhost",
   database: "phxball_dev",
   stacktrace: true,
