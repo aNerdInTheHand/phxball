@@ -1,0 +1,47 @@
+<.header>
+  Listing Clubs
+  <:actions>
+    <.link patch={~p"/clubs/new"}>
+      <.button>New Club</.button>
+    </.link>
+  </:actions>
+</.header>
+
+<.table
+  id="clubs"
+  rows={@streams.clubs}
+  row_click={fn {_id, club} -> JS.navigate(~p"/clubs/#{club}") end}
+>
+  <:col :let={{_id, club}} label="Name"><%= club.name %></:col>
+  <:col :let={{_id, club}} label="Country"><%= club.country %></:col>
+  <:col :let={{_id, club}} label="Reputation"><%= club.reputation %></:col>
+  <:col :let={{_id, club}} label="Balance"><%= club.balance %></:col>
+  <:col :let={{_id, club}} label="Stadium"><%= club.stadium_id %></:col>
+  <:col :let={{_id, club}} label="Short name"><%= club.short_name %></:col>
+  <:col :let={{_id, club}} label="Initials"><%= club.initials %></:col>
+  <:action :let={{_id, club}}>
+    <div class="sr-only">
+      <.link navigate={~p"/clubs/#{club}"}>Show</.link>
+    </div>
+    <.link patch={~p"/clubs/#{club}/edit"}>Edit</.link>
+  </:action>
+  <:action :let={{id, club}}>
+    <.link
+      phx-click={JS.push("delete", value: %{id: club.id}) |> hide("##{id}")}
+      data-confirm="Are you sure?"
+    >
+      Delete
+    </.link>
+  </:action>
+</.table>
+
+<.modal :if={@live_action in [:new, :edit]} id="club-modal" show on_cancel={JS.patch(~p"/clubs")}>
+  <.live_component
+    module={PhxballWeb.ClubLive.FormComponent}
+    id={@club.id || :new}
+    title={@page_title}
+    action={@live_action}
+    club={@club}
+    patch={~p"/clubs"}
+  />
+</.modal>

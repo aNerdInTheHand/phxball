@@ -5,6 +5,8 @@
 * start of person and people
 */
 
+// TODO: indexes
+
 enum genders {
   male
   female
@@ -13,6 +15,7 @@ enum genders {
 
 Table person {
   id integer [primary key]
+  country_id integer [ref: - country.id]
   first_name varchar
   last_name varchar
   dob date
@@ -32,6 +35,8 @@ Table player {
   men_aggression integer
   men_composure integer
   men_fortitude integer
+  phys_height integer
+  phys_weight integer
   phys_cardio integer
   phys_speed integer
   phys_recovery integer
@@ -118,11 +123,38 @@ Table player_injuries as pi {
 /**
 * start of club and teams
 */
+Table stadium {
+  id integer [primary key]
+  name varchar
+  capacity integer
+  rent integer
+  is_owned boolean
+}
+
+enum confederations {
+  caf
+  afc
+  uefa
+  concacaf
+  ofc
+  conmebol
+}
+
+Table country {
+  id integer [primary key]
+  name varchar
+  heritage integer
+  confederation confederations
+}
+
 Table club {
   id integer [primary key]
+  country_id integer [ref: - country.id]
   name varchar
   country string // TODO - countries table?
   reputation integer
+  balance integer
+  stadium_id integer
 }
 
 enum team_genders {
@@ -159,12 +191,65 @@ Table national_team {
 * end of club and teams
 */
 
+/**
+* start of leagues and cups
+*/
+enum competition_types {
+  league
+  cup
+}
+
+Table competition {
+  id integer [primary key]
+  country_id integer [ref: - country.id]
+  competition_type competition_types
+  no_of_teams integer
+  points_per_win integer
+}
+
+Table league_table {
+  id integer [primary key]
+  league_id integer [ref: - competition.id]
+  team_id integer [ref: - competition.id]
+  won integer
+  drawn integer
+  lost integer
+}
+
+Table match {
+  id integer [primary key]
+  competition_id integer [ref: - competition.id]
+  home_team_id integer [ref: - team.id]
+  away_team_id integer [ref: - team.id]
+  h_shots integer
+  h_on_target integer
+  h_possession integer
+  h_corners integer
+  h_fouls integer
+  h_yellow_cards integer
+  h_red_cards integer
+  a_shots integer
+  a_on_target integer
+  a_possession integer
+  a_corners integer
+  a_fouls integer
+  a_yellow_cards integer
+  a_red_cards integer
+  home_player_1 integer [ref: - player.id]
+  played boolean [Note: 'Game has been played, has result']
+}
+/**
+* end of leagues and cups
+*/
+
 // person relationships
-REF: player.person_id < person.id
-REF: coach.person_id < person.id
-REF: administrator.person_id < person.id
-REF: pi.player_id < player.id
-REF: pi.injury_id < injury.id
+REF: player.person_id - person.id
+REF: coach.person_id - person.id
+REF: administrator.person_id - person.id
+REF: pi.player_id - player.id
+REF: pi.injury_id - injury.id
 
 // club relationships
 REF: team.club_id > club.id
+REF: club.stadium_id < stadium.id
+// club can have >1 stadium - link to team?
