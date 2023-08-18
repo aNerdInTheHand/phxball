@@ -6,6 +6,37 @@ defmodule Phxball.People do
   import Ecto.Query, warn: false
   alias Phxball.Repo
 
+  alias Phxball.People.Person
+
+  @doc """
+  Returns the list of people.
+
+  ## Examples
+
+      iex> get_people()
+      [%Person{}, ...]
+
+  """
+  def get_people do
+    Repo.all(Person)
+  end
+
+  @doc """
+  Gets a single person by id.
+
+  Raises `Ecto.NoResultsError` if the Player does not exist.
+
+  ## Examples
+
+      iex> get_person!(123)
+      %Person{}
+
+      iex> get_person!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_person!(id), do: Repo.get!(Person, id)
+
   alias Phxball.People.Player
 
   @doc """
@@ -23,6 +54,30 @@ defmodule Phxball.People do
 
   @doc """
   Gets a single player.
+
+  Raises `Ecto.NoResultsError` if the Player does not exist.
+
+  ## Examples
+
+      iex> get_player!(123)
+      %Player{}
+
+      iex> get_player!(456)
+      ** (Ecto.NoResultsError)
+
+  """
+  def get_player_by_person_id!(person_id) do
+    from(p in Player,
+      join: pn in Person,
+      on: pn.id == p.person_id,
+      where: p.person_id == ^person_id,
+      select: p
+    )
+    |> Repo.one()
+  end
+
+  @doc """
+  Gets a single player by person_id.
 
   Raises `Ecto.NoResultsError` if the Player does not exist.
 
