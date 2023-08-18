@@ -10,8 +10,11 @@ defmodule Phxball.Repo.Migrations.CreatePeople do
       add :role, :string
       add :wage, :integer
       add :reputation, :integer
+      add :club_id, references(:clubs, on_delete: :nothing)
 
       timestamps()
     end
+
+    create index(:people, [:club_id])
   end
 end

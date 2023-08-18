@@ -1,4 +1,4 @@
-defmodule Phxball.People.Person do
+defmodule Phxball.Person.Person do
   use Ecto.Schema
   import Ecto.Changeset
 
