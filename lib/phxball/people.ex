@@ -7,6 +7,7 @@ defmodule Phxball.People do
   alias Phxball.Repo
 
   alias Phxball.People.Person
+  alias Phxball.Clubs.Club
 
   @doc """
   Returns the list of people.
@@ -71,9 +72,29 @@ defmodule Phxball.People do
       join: pn in Person,
       on: pn.id == p.person_id,
       where: p.person_id == ^person_id,
-      select: p
+      select: [p, pn]
     )
     |> Repo.one()
+  end
+
+  def list_player_profiles!() do
+    from(p in Player,
+      join: pn in Person,
+      on: pn.id == p.person_id,
+      join: c in Club,
+      on: c.id == pn.club_id,
+      select: %{
+        id: pn.id,
+        first_name: pn.first_name,
+        last_name: pn.last_name,
+        club: c.name,
+        reputation: pn.reputation,
+        position: p.position
+      }
+    )
+    |> Repo.all()
+
+
   end
 
   @doc """

@@ -54,6 +54,9 @@ defmodule PhxballWeb.PlayerLive.FormComponent do
         </:actions>
       </.simple_form>
     </div>
+    <div>
+      <.live_component module={PhxballWeb.PlayerLive.RadarComponent} id="demo" />
+    </div>
     """
   end
 

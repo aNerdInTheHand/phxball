@@ -6,7 +6,7 @@ defmodule PhxballWeb.PlayerLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :players, People.list_players())}
+    {:ok, stream(socket, :players, People.list_player_profiles!())}
   end
 
   @impl true
