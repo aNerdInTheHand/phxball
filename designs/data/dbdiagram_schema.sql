@@ -238,6 +238,15 @@ Table match {
   home_player_1 integer [ref: - player.id]
   played boolean [Note: 'Game has been played, has result']
 }
+
+Table lineup {
+  id integer [primary key]
+  match_id integer [ref: - match.id]
+  person_id integer [ref: - person.id]
+  position_index integer [Note: '0-10 are starters, rest are subs']
+
+  Note: 'Join table for match and player'
+}
 /**
 * end of leagues and cups
 */

@@ -6,11 +6,13 @@ defmodule PhxballWeb.PlayerLive.Index do
 
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, stream(socket, :players, People.list_player_profiles!())}
+    players = People.list_player_profiles(1)
+    {:ok, stream(socket, :players, players)}
   end
 
   @impl true
   def handle_params(params, _url, socket) do
+    IO.inspect(params, label: "PARAMS")
     {:noreply, apply_action(socket, socket.assigns.live_action, params)}
   end
 

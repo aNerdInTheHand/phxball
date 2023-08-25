@@ -51,7 +51,8 @@ defmodule Phxball.MixProject do
       {:jason, "~> 1.2"},
       {:plug_cowboy, "~> 2.5"},
       {:faker, "~> 0.17", only: [:test, :dev]},
-      {:vega_lite, "~> 0.1.8"}
+      {:vega_lite, "~> 0.1.8"},
+      {:ex_doc, "~> 0.21", only: :dev, runtime: false}
     ]
   end
 

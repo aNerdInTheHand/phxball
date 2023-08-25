@@ -77,23 +77,60 @@ defmodule Phxball.People do
     |> Repo.one()
   end
 
-  def list_player_profiles!() do
+  @doc """
+  Gets all the stats for a player's profile page for all players or all players for a club.
+
+  ## Examples
+
+      iex> list_player_profiles()
+      [%{}, ...]
+
+      iex> list_player_profiles(1)
+      [%{}, ...]
+
+  """
+
+  def list_player_profiles(club_id) do
     from(p in Player,
       join: pn in Person,
       on: pn.id == p.person_id,
       join: c in Club,
       on: c.id == pn.club_id,
+      where: c.id == ^club_id,
       select: %{
         id: pn.id,
         first_name: pn.first_name,
         last_name: pn.last_name,
         club: c.name,
         reputation: pn.reputation,
-        position: p.position
+        wage: pn.wage,
+        position: p.position,
+        att_heading: p.att_heading,
+        att_link_up: p.att_link_up,
+        att_shooting: p.att_shooting,
+        def_attacking: p.def_attacking,
+        def_heading: p.def_heading,
+        def_marking: p.def_marking,
+        def_positioning: p.def_positioning,
+        def_tackling: p.def_tackling,
+        gk_crosses: p.gk_crosses,
+        gk_distribution: p.gk_distribution,
+        gk_shotstopping: p.gk_shotstopping,
+        men_aggression: p.men_aggression,
+        men_composure: p.men_composure,
+        men_fortitude: p.men_fortitude,
+        mid_dribbling: p.mid_dribbling,
+        mid_flair: p.mid_flair,
+        mid_passing: p.mid_passing,
+        mid_positioning: p.mid_positioning,
+        mid_shooting: p.mid_shooting,
+        phys_cardio: p.phys_cardio,
+        phys_recovery: p.phys_recovery,
+        phys_resilience: p.phys_resilience,
+        phys_speed: p.phys_speed
       }
     )
     |> Repo.all()
-
 
   end
 
