@@ -35,6 +35,22 @@ defmodule Phxball.People.Const do
     :att_cf_high
   ]
 
+  def levels, do: [
+    :world_class,
+    :amazing,
+    :excellent,
+    :very_good,
+    :good,
+    :decent,
+    :mediocre,
+    :poor,
+    :very_poor,
+    :terrible,
+    :shocking,
+    :lowest,
+    :barely_functional
+  ]
+
   def gk_key_stats, do: [
     :gk_crosses,
     :gk_distribution,
