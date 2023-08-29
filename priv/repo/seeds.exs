@@ -14,7 +14,11 @@ defmodule Phxball.Seeds do
   alias Faker.Date
   alias Faker.Person, as: FakePerson
 
-  alias Phxball.Repo
+  alias Phxball.{
+    ClubBuilder,
+    PersonBuilder,
+    Repo
+  }
   alias Phxball.Clubs.Club
   alias Phxball.People.Person
   alias Phxball.People.Player
@@ -26,45 +30,46 @@ defmodule Phxball.Seeds do
   end
 
   def insert_all() do
-    nufc = Repo.insert! %Club{
-      name: "Newcastle United Football Club",
-      short_name: "Newcastle",
-      initials: "NUFC",
-      country: "England",
-      reputation: 94,
-      balance: 100000000
-    }
+    %{id: free_agents_fc_id} = ClubBuilder.insert_default()
+    PersonBuilder.build_for_club(free_agents_fc_id) |> PersonBuilder.insert()
 
-    bcfc = Repo.insert! %Club{
-      name: "Bortchester City Football Club",
-      short_name: "Bortchester",
-      initials: "BCFC",
-      country: "England",
-      reputation: 100,
-      balance: 75000000
-    }
+    # nufc = Repo.insert! %Club{
+    #   name: "Newcastle United Football Club",
+    #   short_name: "Newcastle",
+    #   initials: "NUFC",
+    #   country: "England",
+    #   reputation: 94,
+    #   balance: 100000000
+    # }
 
-    for i <- 1..50 do
-      position = case i do
-        i when i < 6 -> :goalkeeper
+    # bcfc = Repo.insert! %Club{
+    #   name: "Bortchester City Football Club",
+    #   short_name: "Bortchester",
+    #   initials: "BCFC",
+    #   country: "England",
+    #   reputation: 100,
+    #   balance: 75000000
+    # }
 
-        i when i < 18 -> :defender
+    # for i <- 1..50 do
+    #   position = case i do
+    #     i when i < 6 -> :goalkeeper
 
-        i when i < 38 -> :midfielder
+    #     i when i < 18 -> :defender
 
-        _ -> :attacker
-      end
+    #     i when i < 38 -> :midfielder
 
-      IO.inspect(position, label: "POSITION")
+    #     _ -> :attacker
+    #   end
 
-      if rem(i, 2) == 0 do
-        person = insert_person(nufc.id)
-        insert_player(person.id, position)
-      else
-        person = insert_person(bcfc.id)
-        insert_player(person.id, position)
-      end
-    end
+    #   if rem(i, 2) == 0 do
+    #     person = insert_person(nufc.id)
+    #     insert_player(person.id, position)
+    #   else
+    #     person = insert_person(bcfc.id)
+    #     insert_player(person.id, position)
+    #   end
+    # end
   end
 
   defp insert_person(club_id) do

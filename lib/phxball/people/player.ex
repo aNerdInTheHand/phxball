@@ -1,6 +1,7 @@
 defmodule Phxball.People.Player do
   use Ecto.Schema
   import Ecto.Changeset
+  alias Phxball.People.Const
 
   schema "players" do
     field :att_heading, :integer
@@ -17,6 +18,7 @@ defmodule Phxball.People.Player do
     field :men_aggression, :integer
     field :men_composure, :integer
     field :men_fortitude, :integer
+    field :men_intelligence, :integer
     field :mid_dribbling, :integer
     field :mid_flair, :integer
     field :mid_passing, :integer
@@ -26,7 +28,7 @@ defmodule Phxball.People.Player do
     field :phys_recovery, :integer
     field :phys_resilience, :integer
     field :phys_speed, :integer
-    field :position, Ecto.Enum, values: [:goalkeeper, :defender, :midfielder, :attacker]
+    field :position, Ecto.Enum, values: Const.positions()
     field :person_id, :id
 
     timestamps()
