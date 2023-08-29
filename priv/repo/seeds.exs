@@ -1,28 +1,14 @@
-# Script for populating the database. You can run it as:
-#
-#     mix run priv/repo/seeds.exs
-#
-# Inside the script, you can read and write to any of your
-# repositories directly:
-#
-#     Phxball.Repo.insert!(%Phxball.SomeSchema{})
-#
-# We recommend using the bang functions (`insert!`, `update!`
-# and so on) as they will fail if something goes wrong.
 defmodule Phxball.Seeds do
 
   alias Faker.Date
   alias Faker.Person, as: FakePerson
 
-  alias Phxball.{
-    ClubBuilder,
-    PersonBuilder,
-    PlayerBuilder,
-    Repo
-  }
+  alias Phxball.Repo
   alias Phxball.Clubs.Club
   alias Phxball.People.Person
   alias Phxball.People.Player
+
+  alias Phxball.Seeds.Teams
 
   def delete_all() do
     Repo.delete_all(Player)
@@ -30,49 +16,7 @@ defmodule Phxball.Seeds do
     Repo.delete_all(Club)
   end
 
-  def insert_all() do
-    %{id: free_agents_fc_id} = ClubBuilder.insert_default()
-    %{id: jeff_id} = PersonBuilder.build_for_club(free_agents_fc_id) |> PersonBuilder.insert()
-    PlayerBuilder.build_for_person(jeff_id) |> PlayerBuilder.insert()
-
-    # nufc = Repo.insert! %Club{
-    #   name: "Newcastle United Football Club",
-    #   short_name: "Newcastle",
-    #   initials: "NUFC",
-    #   country: "England",
-    #   reputation: 94,
-    #   balance: 100000000
-    # }
-
-    # bcfc = Repo.insert! %Club{
-    #   name: "Bortchester City Football Club",
-    #   short_name: "Bortchester",
-    #   initials: "BCFC",
-    #   country: "England",
-    #   reputation: 100,
-    #   balance: 75000000
-    # }
-
-    # for i <- 1..50 do
-    #   position = case i do
-    #     i when i < 6 -> :goalkeeper
-
-    #     i when i < 18 -> :defender
-
-    #     i when i < 38 -> :midfielder
-
-    #     _ -> :attacker
-    #   end
-
-    #   if rem(i, 2) == 0 do
-    #     person = insert_person(nufc.id)
-    #     insert_player(person.id, position)
-    #   else
-    #     person = insert_person(bcfc.id)
-    #     insert_player(person.id, position)
-    #   end
-    # end
-  end
+  def insert_all(), do: Teams.populate()
 
   defp insert_person(club_id) do
     earliest_dob = ~D[1982-01-01]

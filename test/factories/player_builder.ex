@@ -12,6 +12,30 @@ defmodule Phxball.PlayerBuilder do
     |> Map.put(:person_id, person_id)
   end
 
+  # def with_world_class_stats(person) do
+  #   %{position: position} = person
+  #   key_stats = case
+  # end
+
+  def with_specific_position(player, position) do
+    Map.put(player, :position, position)
+  end
+
+  def build_random_goalkeeper(), do: build_random_for_position("gk_")
+  def build_random_defender(), do: build_random_for_position("def_")
+  def build_random_midfielder(), do: build_random_for_position("mid_")
+  def build_random_attacker(), do: build_random_for_position("att_")
+
+  defp build_random_for_position(player), do: default_attrs()
+  defp build_random_for_position(player, position_prefix) do
+    position = Const.positions()
+      |> Enum.filter(fn x -> String.starts_with?(to_string(x), position_prefix) end)
+      |> Enum.random()
+
+    default_attrs()
+    |> Map.put(player, :position, position)
+  end
+
   defp default_attrs do
     %Player{
       att_heading: Faker.random_between(1, 100),
@@ -42,7 +66,13 @@ defmodule Phxball.PlayerBuilder do
     }
   end
 
-  def insert(person) do
-    Repo.insert! person
+  # defp generate_stats_for_position(position, level \\ "world_class") do
+  #   case position do
+  #     String.starts_with?(position, "")
+  #   end
+  # end
+
+  def insert(player) do
+    Repo.insert! player
   end
 end

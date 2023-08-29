@@ -34,4 +34,65 @@ defmodule Phxball.People.Const do
     :att_cf_wide,
     :att_cf_high
   ]
+
+  def gk_key_stats, do: [
+    :gk_crosses,
+    :gk_distribution,
+    :gk_shotstopping,
+    :men_composure,
+    :men_fortitude
+  ]
+
+  def lb_rb_key_stats, do: [
+    :def_attacking,
+    :def_tackling,
+    :def_positioning,
+    :men_intelligence,
+    :mid_passing,
+    :phys_cardio,
+    :phys_speed
+  ]
+
+  def cb_key_stats, do: [
+    :def_heading,
+    :def_marking,
+    :def_positioning,
+    :def_tackling,
+    :men_aggression,
+    :men_composure,
+    :phys_speed
+  ]
+
+  def cm_key_stats, do: [
+    :men_aggression,
+    :men_composure,
+    :men_fortitude,
+    :men_intelligence,
+    :mid_flair,
+    :mid_passing,
+    :mid_positioning,
+    :mid_shooting,
+    :phys_cardio
+  ]
+
+  def lw_rw_key_stats, do: [
+    :men_intelligence,
+    :mid_dribbling,
+    :mid_flair,
+    :mid_passing,
+    :mid_shooting,
+    :phys_cardio,
+    :phys_speed
+  ]
+
+  def att_key_stats, do: [
+    :att_heading,
+    :att_link_up,
+    :att_shooting,
+    :men_aggression,
+    :men_composure,
+    :men_fortitude,
+    :men_intelligence,
+    :phys_speed
+  ]
 end

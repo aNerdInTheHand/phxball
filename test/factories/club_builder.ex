@@ -36,7 +36,7 @@ defmodule Phxball.ClubBuilder do
     }
   end
 
-  def insert_default, do: build() |> insert()
+  def insert_random, do: build() |> insert()
 
   def insert(club) do
     Repo.insert! club
