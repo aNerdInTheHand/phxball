@@ -5,10 +5,16 @@ defmodule Phxball.Seeds.Teams do
     PlayerBuilder
   }
   alias Phxball.People.Const
+  alias Phxball.Teams.{
+    Lfc,
+    Nufc
+  }
 
   def populate() do
     insert_free_agents_fc()
     insert_random_teams()
+    Nufc.create()
+    Lfc.create()
   end
 
   defp insert_free_agents_fc() do
