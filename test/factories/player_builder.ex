@@ -33,7 +33,7 @@ defmodule Phxball.PlayerBuilder do
       |> Enum.random()
 
     default_attrs()
-    |> Map.put(player, :position, position)
+    |> Map.put(:position, position)
   end
 
   defp default_attrs do
@@ -66,11 +66,49 @@ defmodule Phxball.PlayerBuilder do
     }
   end
 
-  # defp generate_stats_for_position(position, level \\ "world_class") do
-  #   case position do
-  #     String.starts_with?(position, "")
-  #   end
-  # end
+  def with_world_class_gk_stats(player), do: with_world_class_stats(player, "gk")
+  def with_world_class_lb_rb_stats(player), do: with_world_class_stats(player, "lb_rb")
+  def with_world_class_cb_stats(player), do: with_world_class_stats(player, "cb")
+  def with_world_class_cm_stats(player), do: with_world_class_stats(player, "cm")
+  def with_world_class_lw_rw_stats(player), do: with_world_class_stats(player, "lw_rw")
+  def with_world_class_att_stats(player), do: with_world_class_stats(player, "att")
+
+  defp with_world_class_stats(player, position_prefix) do
+    position = position_prefix <> "_key_stats"
+    key_stats_list = apply(Const, String.to_existing_atom(position), [])
+    key_stats = Enum.into(key_stats_list, %{}, fn x -> {x, Faker.random_between(90, 100)} end)
+    # refactor - double merge to lower ancillary stats without removing person_id + position
+    Map.merge(all_low_stats(), player) |> Map.merge(key_stats)
+  end
+
+  defp all_low_stats() do
+    %{
+      att_heading: Faker.random_between(1, 10),
+      att_link_up: Faker.random_between(1, 10),
+      att_shooting: Faker.random_between(1, 10),
+      def_attacking: Faker.random_between(1, 10),
+      def_heading: Faker.random_between(1, 10),
+      def_marking: Faker.random_between(1, 10),
+      def_positioning: Faker.random_between(1, 10),
+      def_tackling: Faker.random_between(1, 10),
+      gk_crosses: Faker.random_between(1, 10),
+      gk_distribution: Faker.random_between(1, 10),
+      gk_shotstopping: Faker.random_between(1, 10),
+      men_aggression: Faker.random_between(1, 10),
+      men_composure: Faker.random_between(1, 10),
+      men_fortitude: Faker.random_between(1, 10),
+      men_intelligence: Faker.random_between(1, 10),
+      mid_dribbling: Faker.random_between(1, 10),
+      mid_flair: Faker.random_between(1, 10),
+      mid_passing: Faker.random_between(1, 10),
+      mid_positioning: Faker.random_between(1, 10),
+      mid_shooting: Faker.random_between(1, 10),
+      phys_cardio: Faker.random_between(1, 10),
+      phys_recovery: Faker.random_between(1, 10),
+      phys_resilience: Faker.random_between(1, 10),
+      phys_speed: Faker.random_between(1, 10)
+    }
+  end
 
   def insert(player) do
     Repo.insert! player
