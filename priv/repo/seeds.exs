@@ -17,6 +17,7 @@ defmodule Phxball.Seeds do
   alias Phxball.{
     ClubBuilder,
     PersonBuilder,
+    PlayerBuilder,
     Repo
   }
   alias Phxball.Clubs.Club
@@ -31,7 +32,8 @@ defmodule Phxball.Seeds do
 
   def insert_all() do
     %{id: free_agents_fc_id} = ClubBuilder.insert_default()
-    PersonBuilder.build_for_club(free_agents_fc_id) |> PersonBuilder.insert()
+    %{id: jeff_id} = PersonBuilder.build_for_club(free_agents_fc_id) |> PersonBuilder.insert()
+    PlayerBuilder.build_for_person(jeff_id) |> PlayerBuilder.insert()
 
     # nufc = Repo.insert! %Club{
     #   name: "Newcastle United Football Club",
