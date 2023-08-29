@@ -2,10 +2,10 @@ import Config
 
 # Configure your database
 config :phxball, Phxball.Repo,
-  username: "postgres",
-  password: "postgres",
-  hostname: "localhost",
-  database: "phxball_dev",
+  username: "",
+  password: "",
+  hostname: "",
+  database: "",
   stacktrace: true,
   show_sensitive_data_on_connection_error: true,
   pool_size: 10
@@ -77,3 +77,5 @@ config :phoenix, :plug_init_mode, :runtime
 
 # Disable swoosh api client as it is only required for production adapters.
 config :swoosh, :api_client, false
+
+if File.exists?("config/dev.secret.exs"), do: import_config("dev.secret.exs")
