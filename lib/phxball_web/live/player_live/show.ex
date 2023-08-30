@@ -2,6 +2,7 @@ defmodule PhxballWeb.PlayerLive.Show do
   use PhxballWeb, :live_view
 
   alias Phxball.People
+  alias Phxball.People.Profiles
 
   @impl true
   def mount(_params, _session, socket) do
@@ -13,7 +14,7 @@ defmodule PhxballWeb.PlayerLive.Show do
     {:noreply,
      socket
      |> assign(:page_title, page_title(socket.assigns.live_action))
-     |> assign(:player, People.get_player!(id))}
+     |> assign(:player, Profiles.get_cm_profile(id))}
   end
 
   defp page_title(:show), do: "Show Player"

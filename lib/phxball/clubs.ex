@@ -37,6 +37,14 @@ defmodule Phxball.Clubs do
   """
   def get_club!(id), do: Repo.get!(Club, id)
 
+  def get_club_id_by_name(name) do
+    from(c in Club,
+      where: c.short_name == ^name,
+      select: c.id
+    )
+    |> Repo.one()
+  end
+
   @doc """
   Creates a club.
 

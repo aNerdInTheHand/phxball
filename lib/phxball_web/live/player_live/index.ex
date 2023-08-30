@@ -2,11 +2,14 @@ defmodule PhxballWeb.PlayerLive.Index do
   use PhxballWeb, :live_view
 
   alias Phxball.People
+  alias Phxball.Clubs
+  alias Phxball.People.Profiles
   alias Phxball.People.Player
 
   @impl true
   def mount(_params, _session, socket) do
-    players = People.list_player_profiles(1)
+    club_id = Clubs.get_club_id_by_name("Newcastle")
+    players = Profiles.get_profiles_for_club(club_id)
     {:ok, stream(socket, :players, players)}
   end
 

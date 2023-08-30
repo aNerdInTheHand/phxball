@@ -1,5 +1,5 @@
 <.header>
-  Player <%= @player.id %>
+  <%= @player.first_name <> " " <> @player.last_name %>
   <:subtitle>This is a player record from your database.</:subtitle>
   <:actions>
     <.link patch={~p"/players/#{@player}/show/edit"} phx-click={JS.push_focus()}>
@@ -8,7 +8,7 @@
   </:actions>
 </.header>
 
-<.list>
+<.list :if={@player.position == :something_that_doesnt_exist_yet}>
   <:item title="Position"><%= @player.position %></:item>
   <:item title="Men aggression"><%= @player.men_aggression %></:item>
   <:item title="Men composure"><%= @player.men_composure %></:item>
@@ -33,6 +33,21 @@
   <:item title="Att shooting"><%= @player.att_shooting %></:item>
   <:item title="Att heading"><%= @player.att_heading %></:item>
   <:item title="Att link up"><%= @player.att_link_up %></:item>
+</.list>
+
+<.list :if={String.contains?(to_string(@player.position), "mid_")}>
+  <:item title="Position"><%= @player.position %></:item>
+  <:item title="Overall"><%= @player.overall %></:item>
+  <:item title="Aggression"><%= @player.men_aggression %></:item>
+  <:item title="Composure"><%= @player.men_composure %></:item>
+  <:item title="Fortitude"><%= @player.men_fortitude %></:item>
+  <:item title="Intelligence"><%= @player.men_intelligence %></:item>
+  <:item title="Cardio"><%= @player.phys_cardio %></:item>
+  <:item title="Strength"><%= @player.phys_strength %></:item>
+  <:item title="Positioning"><%= @player.mid_positioning %></:item>
+  <:item title="Passing"><%= @player.mid_passing %></:item>
+  <:item title="Shooting"><%= @player.mid_shooting %></:item>
+  <:item title="Flair"><%= @player.mid_flair %></:item>
 </.list>
 
 <.back navigate={~p"/players"}>Back to players</.back>

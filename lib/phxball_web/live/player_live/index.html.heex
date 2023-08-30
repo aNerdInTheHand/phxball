@@ -51,7 +51,7 @@
 <.modal :if={@live_action in [:new, :edit]} id="player-modal" show on_cancel={JS.patch(~p"/players")}>
   <.live_component
     module={PhxballWeb.PlayerLive.FormComponent}
-    id={@player.id || :new}
+    id={@player.player_id || :new}
     title={@page_title}
     action={@live_action}
     player={@player}
