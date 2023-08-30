@@ -77,7 +77,8 @@ defmodule Phxball.People.Const do
     :def_tackling,
     :men_aggression,
     :men_composure,
-    :phys_speed
+    :phys_speed,
+    :phys_strength
   ]
 
   def cm_key_stats, do: [
@@ -89,7 +90,8 @@ defmodule Phxball.People.Const do
     :mid_passing,
     :mid_positioning,
     :mid_shooting,
-    :phys_cardio
+    :phys_cardio,
+    :phys_strength
   ]
 
   def lw_rw_key_stats, do: [
@@ -110,6 +112,7 @@ defmodule Phxball.People.Const do
     :men_composure,
     :men_fortitude,
     :men_intelligence,
-    :phys_speed
+    :phys_speed,
+    :phys_strength
   ]
 end

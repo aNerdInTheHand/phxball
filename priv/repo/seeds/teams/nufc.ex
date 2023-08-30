@@ -35,8 +35,8 @@ defmodule Phxball.Teams.Nufc do
   defp create_players(club_id) do
     goalkeepers(club_id)
     defenders(club_id)
-    # midfielders(club_id)
-    # attackers(club_id)
+    midfielders(club_id)
+    attackers(club_id)
   end
 
   defp goalkeepers(club_id) do
@@ -64,29 +64,23 @@ defmodule Phxball.Teams.Nufc do
   end
 
   defp midfielders(club_id) do
-    # joelinton(club_id)
-    # sandro_tonali(club_id)
-    # anthony_gordon(club_id)
-    # matt_ritchie(club_id)
-    # harvey_barnes(club_id)
-    # jacob_murphy(club_id)
-    # miguel_almiron(club_id)
-    # joe_willock(club_id)
-    # elliot_anderson(club_id)
-    # lucas_de_bolle(club_id)
-    # sean_longstaff(club_id)
-    # bruno_guimaraes(club_id)
-    # joe_white(club_id)
-    # jamie_miley(club_id)
-    # amadou_diallo(club_id)
-    # lewis_miley(club_id)
+    joelinton(club_id)
+    sandro_tonali(club_id)
+    anthony_gordon(club_id)
+    matt_ritchie(club_id)
+    harvey_barnes(club_id)
+    jacob_murphy(club_id)
+    miguel_almiron(club_id)
+    joe_willock(club_id)
+    elliot_anderson(club_id)
+    sean_longstaff(club_id)
+    bruno_guimaraes(club_id)
+    lewis_miley(club_id)
   end
 
   defp attackers(club_id) do
-    # callum_wilson(club_id)
-    # alexander_isak(club_id)
-    # michael_ndiweni(club_id)
-    # ben_parkinson(club_id)
+    callum_wilson(club_id)
+    alexander_isak(club_id)
   end
 
   defp nick_pope(club_id) do
@@ -425,6 +419,276 @@ defmodule Phxball.Teams.Nufc do
     PlayerBuilder.build_for_person(person_id)
     |> PlayerBuilder.with_specific_position(:def_cb_def)
     |> PlayerBuilder.with_level_and_position(:mediocre, "cb")
+    |> PlayerBuilder.insert()
+  end
+
+  defp joelinton(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "",
+      last_name: "Joelinton",
+      dob: ~D[1996-08-14],
+      gender: :male,
+      reputation: 85,
+      role: :player,
+      wage: higher_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_boxtobox)
+    |> PlayerBuilder.with_level_and_position(:amazing, "cm")
+    |> PlayerBuilder.with_world_class_mental_stats()
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp sandro_tonali(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Sandro",
+      last_name: "Tonali",
+      dob: ~D[2000-08-05],
+      gender: :male,
+      reputation: 92,
+      role: :player,
+      wage: highest_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_boxtobox)
+    |> PlayerBuilder.with_level_and_position(:world_class, "cm")
+    |> PlayerBuilder.with_world_class_mental_stats()
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp anthony_gordon(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Anthony",
+      last_name: "Gordon",
+      dob: ~D[2001-02-24],
+      gender: :male,
+      reputation: 85,
+      role: :player,
+      wage: high_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_lw_att)
+    |> PlayerBuilder.with_level_and_position(:excellent, "lw_rw")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp matt_ritchie(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Matt",
+      last_name: "Ritchie",
+      dob: ~D[1989-09-10],
+      gender: :male,
+      reputation: 75,
+      role: :player,
+      wage: mid_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_rm_att)
+    |> PlayerBuilder.with_level_and_position(:good, "lw_rw")
+    |> PlayerBuilder.insert()
+  end
+
+  defp harvey_barnes(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Harvey",
+      last_name: "Barnes",
+      dob: ~D[1997-12-09],
+      gender: :male,
+      reputation: 78,
+      role: :player,
+      wage: high_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_lw_att)
+    |> PlayerBuilder.with_level_and_position(:very_good, "lw_rw")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp jacob_murphy(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Jacob",
+      last_name: "Murphy",
+      dob: ~D[1995-02-24],
+      gender: :male,
+      reputation: 73,
+      role: :player,
+      wage: mid_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_rm_balanced)
+    |> PlayerBuilder.with_level_and_position(:very_good, "lw_rw")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp miguel_almiron(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Miguel",
+      last_name: "Almiron",
+      dob: ~D[1994-02-10],
+      gender: :male,
+      reputation: 81,
+      role: :player,
+      wage: high_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_rm_balanced)
+    |> PlayerBuilder.with_level_and_position(:very_good, "lw_rw")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp joe_willock(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Joe",
+      last_name: "Willock",
+      dob: ~D[1999-08-20],
+      gender: :male,
+      reputation: 82,
+      role: :player,
+      wage: higher_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_att)
+    |> PlayerBuilder.with_level_and_position(:excellent, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp elliot_anderson(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Elliot",
+      last_name: "Anderson",
+      dob: ~D[2002-11-06],
+      gender: :male,
+      reputation: 74,
+      role: :player,
+      wage: mid_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_att)
+    |> PlayerBuilder.with_level_and_position(:very_good, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp sean_longstaff(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Sean",
+      last_name: "Longstaff",
+      dob: ~D[1997-10-30],
+      gender: :male,
+      reputation: 79,
+      role: :player,
+      wage: high_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_boxtobox)
+    |> PlayerBuilder.with_level_and_position(:very_good, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp bruno_guimaraes(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Bruno",
+      last_name: "Guimaraes",
+      dob: ~D[1997-11-16],
+      gender: :male,
+      reputation: 93,
+      role: :player,
+      wage: highest_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_boxtobox)
+    |> PlayerBuilder.with_level_and_position(:world_class, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.with_world_class_mental_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp lewis_miley(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Lewis",
+      last_name: "Miley",
+      dob: ~D[2006-05-01],
+      gender: :male,
+      reputation: 60,
+      role: :player,
+      wage: lowest_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:mid_cm_att)
+    |> PlayerBuilder.with_level_and_position(:decent, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp callum_wilson(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Callum",
+      last_name: "Wilson",
+      dob: ~D[1992-02-27],
+      gender: :male,
+      reputation: 91,
+      role: :player,
+      wage: higher_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:att_cf_pressing)
+    |> PlayerBuilder.with_level_and_position(:amazing, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.with_world_class_mental_stats()
+    |> PlayerBuilder.insert()
+  end
+
+  defp alexander_isak(club_id) do
+    %{id: person_id} = %Person{
+      first_name: "Alexander",
+      last_name: "Isak",
+      dob: ~D[1999-09-21],
+      gender: :male,
+      reputation: 87,
+      role: :player,
+      wage: higher_salary(),
+      club_id: club_id
+    } |> PersonBuilder.insert()
+
+    PlayerBuilder.build_for_person(person_id)
+    |> PlayerBuilder.with_specific_position(:att_cf_wide)
+    |> PlayerBuilder.with_level_and_position(:amazing, "cm")
+    |> PlayerBuilder.with_world_class_physical_stats()
+    |> PlayerBuilder.with_world_class_mental_stats()
     |> PlayerBuilder.insert()
   end
 end

@@ -119,7 +119,8 @@ defmodule Phxball.PlayerBuilder do
       phys_cardio: Faker.random_between(65, 75),
       phys_recovery: Faker.random_between(65, 75),
       phys_resilience: Faker.random_between(65, 75),
-      phys_speed: Faker.random_between(65, 75)
+      phys_speed: Faker.random_between(65, 75),
+      phys_strength: Faker.random_between(65, 75)
     }
   end
 
@@ -128,7 +129,8 @@ defmodule Phxball.PlayerBuilder do
       phys_cardio: Faker.random_between(85, 100),
       phys_recovery: Faker.random_between(85, 100),
       phys_resilience: Faker.random_between(85, 100),
-      phys_speed: Faker.random_between(85, 100)
+      phys_speed: Faker.random_between(85, 100),
+      phys_strength: Faker.random_between(85, 100)
     }
   end
 

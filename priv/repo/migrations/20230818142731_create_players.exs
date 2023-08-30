@@ -10,6 +10,7 @@ defmodule Phxball.Repo.Migrations.CreatePlayers do
       add :men_intelligence, :integer
       add :phys_cardio, :integer
       add :phys_speed, :integer
+      add :phys_strength, :integer
       add :phys_recovery, :integer
       add :phys_resilience, :integer
       add :gk_shotstopping, :integer

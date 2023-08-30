@@ -28,6 +28,7 @@ defmodule Phxball.People.Player do
     field :phys_recovery, :integer
     field :phys_resilience, :integer
     field :phys_speed, :integer
+    field :phys_strength, :integer
     field :position, Ecto.Enum, values: Const.positions()
     field :person_id, :id
 
@@ -37,7 +38,7 @@ defmodule Phxball.People.Player do
   @doc false
   def changeset(player, attrs) do
     player
-    |> cast(attrs, [:position, :men_aggression, :men_composure, :men_fortitude, :phys_cardio, :phys_speed, :phys_recovery, :phys_resilience, :gk_shotstopping, :gk_crosses, :gk_distribution, :def_marking, :def_positioning, :def_heading, :def_tackling, :def_attacking, :mid_positioning, :mid_passing, :mid_shooting, :mid_dribbling, :mid_flair, :att_shooting, :att_heading, :att_link_up])
-    |> validate_required([:position, :men_aggression, :men_composure, :men_fortitude, :phys_cardio, :phys_speed, :phys_recovery, :phys_resilience, :gk_shotstopping, :gk_crosses, :gk_distribution, :def_marking, :def_positioning, :def_heading, :def_tackling, :def_attacking, :mid_positioning, :mid_passing, :mid_shooting, :mid_dribbling, :mid_flair, :att_shooting, :att_heading, :att_link_up])
+    |> cast(attrs, [:position, :men_aggression, :men_composure, :men_fortitude, :phys_cardio, :phys_speed, :phys_strength, :phys_recovery, :phys_resilience, :gk_shotstopping, :gk_crosses, :gk_distribution, :def_marking, :def_positioning, :def_heading, :def_tackling, :def_attacking, :mid_positioning, :mid_passing, :mid_shooting, :mid_dribbling, :mid_flair, :att_shooting, :att_heading, :att_link_up])
+    |> validate_required([:position, :men_aggression, :men_composure, :men_fortitude, :phys_cardio, :phys_speed, :phys_strength, :phys_recovery, :phys_resilience, :gk_shotstopping, :gk_crosses, :gk_distribution, :def_marking, :def_positioning, :def_heading, :def_tackling, :def_attacking, :mid_positioning, :mid_passing, :mid_shooting, :mid_dribbling, :mid_flair, :att_shooting, :att_heading, :att_link_up])
   end
 end
