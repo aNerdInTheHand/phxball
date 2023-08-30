@@ -15,7 +15,15 @@ defmodule Phxball.Repo.Migrations.CreateLwRwProfileView do
       pl.phys_speed,
       pl.mid_flair,
       pl.mid_dribbling,
-      pl.mid_passing
+      pl.mid_passing,
+      (
+        pl.men_intelligence +
+        pl.phys_cardio +
+        pl.phys_speed +
+        pl.mid_flair +
+        pl.mid_dribbling +
+        pl.mid_passing
+      ) / 6 as overall
     from players pl
     join people pe on pl.person_id = pe.id
     join clubs c on pe.club_id = c.id

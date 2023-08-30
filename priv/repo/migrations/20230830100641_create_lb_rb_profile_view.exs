@@ -16,7 +16,16 @@ defmodule Phxball.Repo.Migrations.CreateLbRbProfileView do
       pl.mid_passing,
       pl.def_positioning,
       pl.def_tackling,
-      pl.def_attacking
+      pl.def_attacking,
+      (
+        pl.men_intelligence +
+        pl.phys_speed +
+        pl.phys_cardio +
+        pl.mid_passing +
+        pl.def_positioning +
+        pl.def_tackling +
+        pl.def_attacking
+      ) / 7 as overall
     from players pl
     join people pe on pl.person_id = pe.id
     join clubs c on pe.club_id = c.id

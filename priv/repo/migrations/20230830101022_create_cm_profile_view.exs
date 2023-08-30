@@ -19,7 +19,19 @@ defmodule Phxball.Repo.Migrations.CreateCmProfileView do
       pl.mid_flair,
       pl.mid_passing,
       pl.mid_positioning,
-      pl.mid_shooting
+      pl.mid_shooting,
+      (
+        pl.men_aggression +
+        pl.men_composure +
+        pl.men_fortitude +
+        pl.men_intelligence +
+        pl.phys_cardio +
+        pl.phys_strength +
+        pl.mid_flair +
+        pl.mid_passing +
+        pl.mid_positioning +
+        pl.mid_shooting
+      ) / 10 as overall
     from players pl
     join people pe on pl.person_id = pe.id
     join clubs c on pe.club_id = c.id

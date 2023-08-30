@@ -17,7 +17,17 @@ defmodule Phxball.Repo.Migrations.CreateCbProfileView do
       pl.def_heading,
       pl.def_marking,
       pl.def_positioning,
-      pl.def_tackling
+      pl.def_tackling,
+      (
+        pl.men_aggression +
+        pl.men_composure +
+        pl.phys_speed +
+        pl.phys_strength +
+        pl.def_heading +
+        pl.def_marking +
+        pl.def_positioning +
+        pl.def_tackling
+      ) / 8 as overall
     from players pl
     join people pe on pl.person_id = pe.id
     join clubs c on pe.club_id = c.id

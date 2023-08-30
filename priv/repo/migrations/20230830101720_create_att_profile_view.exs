@@ -18,7 +18,18 @@ defmodule Phxball.Repo.Migrations.CreateAttProfileView do
       pl.phys_strength,
       pl.att_heading,
       pl.att_link_up,
-      pl.att_shooting
+      pl.att_shooting,
+      (
+        pl.men_aggression +
+        pl.men_composure +
+        pl.men_fortitude +
+        pl.men_intelligence +
+        pl.phys_speed +
+        pl.phys_strength +
+        pl.att_heading +
+        pl.att_link_up +
+        pl.att_shooting
+      ) / 9 as overall
     from players pl
     join people pe on pl.person_id = pe.id
     join clubs c on pe.club_id = c.id
