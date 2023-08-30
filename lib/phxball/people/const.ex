@@ -7,6 +7,7 @@ defmodule Phxball.People.Const do
     :def_rb_def,
     :def_rb_att,
     :def_cb_def,
+    :def_cb_att,
     :def_cb_sweeper,
     :mid_dm_def,
     :mid_dm_boxtobox,

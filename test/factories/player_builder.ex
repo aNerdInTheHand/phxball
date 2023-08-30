@@ -74,6 +74,14 @@ defmodule Phxball.PlayerBuilder do
   def with_world_class_lw_rw_stats(player), do: with_level_and_position(player, :world_class, "lw_rw")
   def with_world_class_att_stats(player), do: with_level_and_position(player, :world_class, "att")
 
+  def with_pace(player), do: Map.put(player, :phys_speed, Faker.random_between(90, 100))
+  def with_pace(player, pace), do: Map.put(player, :phys_speed, pace)
+  def with_strength(player), do: Map.put(player, :phys_strength, Faker.random_between(90, 100))
+  def with_strength(player, strength), do: Map.put(player, :phys_strength, strength)
+
+  def with_world_class_physical_stats(player), do: Map.merge(player, good_phys_stats())
+  def with_world_class_mental_stats(player), do: Map.merge(player, good_phys_stats())
+
   defp with_stats(player, position_prefix, upper_bound, lower_bound) do
     position = position_prefix <> "_key_stats"
     key_stats_list = apply(Const, String.to_existing_atom(position), [])
@@ -112,6 +120,24 @@ defmodule Phxball.PlayerBuilder do
       phys_recovery: Faker.random_between(65, 75),
       phys_resilience: Faker.random_between(65, 75),
       phys_speed: Faker.random_between(65, 75)
+    }
+  end
+
+  defp good_phys_stats() do
+    %{
+      phys_cardio: Faker.random_between(85, 100),
+      phys_recovery: Faker.random_between(85, 100),
+      phys_resilience: Faker.random_between(85, 100),
+      phys_speed: Faker.random_between(85, 100)
+    }
+  end
+
+  defp good_mental_stats() do
+    %{
+      men_aggression: Faker.random_between(85, 100),
+      men_composure: Faker.random_between(85, 100),
+      men_fortitude: Faker.random_between(85, 100),
+      men_intelligence: Faker.random_between(85, 100),
     }
   end
 
